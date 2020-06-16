@@ -4,7 +4,7 @@ export default {
   generateREADME: (formObject, techState, ackState) => {
     axios({
       method: "POST",
-      url: "/generateREADME",
+      url: "/generate",
       data: {
         formObject,
         techState,
