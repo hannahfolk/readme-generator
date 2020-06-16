@@ -24,6 +24,7 @@ const UserInputForm = () => {
     installation: "",
     license: "",
     linkedIn: "https://linkedin.com/in/",
+    name: "",
     projectName: "",
     repoName: "",
     twitter: "https://twitter.com/",
@@ -34,15 +35,13 @@ const UserInputForm = () => {
   const [ackState, setAckState] = useState([]);
 
   const {
-    acknowledgements,
-    builtWith,
     contributing,
     description,
     email,
     imagePreview,
     installation,
-    license,
     linkedIn,
+    name,
     projectName,
     repoName,
     twitter,
@@ -50,7 +49,6 @@ const UserInputForm = () => {
     username,
   } = formObject;
 
-  // Creates the form for built with technologies
   const _createTechForm = () => {
     return techState.map((tech, i) => (
       <TechForm
@@ -63,7 +61,6 @@ const UserInputForm = () => {
     ));
   };
 
-  // Handles the input change for the two inputs in the technology form
   const handleTechChange = (event) => {
     const updatedTechs = [...techState];
     const dataIndex = event.target.dataset.index;
@@ -72,12 +69,10 @@ const UserInputForm = () => {
     setTechState(updatedTechs);
   };
 
-  // Adds a technology card
   const _addTech = () => {
     setTechState([...techState, { techName: "", techURL: "" }]);
   };
 
-  // Removes a technology card
   const removeTech = (event) => {
     const techCards = [...techState];
     const dataIndex = event.target.dataset.index;
@@ -85,7 +80,6 @@ const UserInputForm = () => {
     setTechState(techCards);
   };
 
-  // Creates the form for acknowledgements
   const _createAckForm = () => {
     return ackState.map((ack, i) => (
       <AckForm
@@ -98,7 +92,6 @@ const UserInputForm = () => {
     ));
   };
 
-  // Handles the input change for the two inputs in the acknowledgements form
   const handleAckChange = (event) => {
     const updatedAcks = [...ackState];
     const dataIndex = event.target.dataset.index;
@@ -107,12 +100,10 @@ const UserInputForm = () => {
     setAckState(updatedAcks);
   };
 
-  // Adds an acknowledgement card
   const _addAck = () => {
     setAckState([...ackState, { name: "", url: "" }]);
   };
 
-  // Removes an acknowledgemenet card
   const removeAck = (event) => {
     const ackCards = [...ackState];
     const dataIndex = event.target.dataset.index;
@@ -152,13 +143,11 @@ const UserInputForm = () => {
     });
   };
 
-  // Handles updating component state when the user types into the input field
   const _handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormObject({ ...formObject, [name]: value });
   };
 
-  // Handles updating component state when the user selects from dropdown menu
   const _handleSelectChange = (event, { name, value }) => {
     setFormObject({ ...formObject, [name]: value });
   };
@@ -191,13 +180,24 @@ const UserInputForm = () => {
             required
           />
         </Form.Field>
+        <Form.Field required>
+          <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="John Smith"
+            onChange={_handleInputChange}
+            required
+          />
+        </Form.Field>
         <Form.Field>
           <label>Email</label>
           <input
             type="text"
             name="email"
             value={email}
-            placeholder="Email"
+            placeholder="johnsmith@example.com"
             onChange={_handleInputChange}
           />
         </Form.Field>
