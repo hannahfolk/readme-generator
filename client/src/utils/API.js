@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  generateREADME: (formObject, techState, ackState) => {
+  generate: (formObject, techState, ackState) => {
     axios({
       method: "POST",
       url: "/generate",

@@ -74,8 +74,10 @@ const UserInputForm = () => {
   };
 
   const removeTech = (event) => {
+    event.stopPropagation();
     const techCards = [...techState];
     const dataIndex = event.target.dataset.index;
+    console.log(dataIndex);
     techCards.splice(dataIndex, 1);
     setTechState(techCards);
   };
@@ -160,8 +162,7 @@ const UserInputForm = () => {
       acknowledgements: ackState,
       builtWith: techState,
     });
-    console.log(formObject);
-    API.generateREADME(formObject);
+    API.generate(formObject, techState, ackState);
   };
 
   return (
@@ -295,7 +296,7 @@ const UserInputForm = () => {
       </Form.Group>
       <h5 className="subHeader">Built With Information</h5>
       <hr />
-      <Button basic color="black" onClick={_addTech} className="add">
+      <Button type="button" basic color="black" onClick={_addTech} className="add">
         <Icon name="plus" />
         Add Technology
       </Button>
@@ -331,7 +332,7 @@ const UserInputForm = () => {
       </Form.Group>
       <h5 className="subHeader">Acknowledgements</h5>
       <hr />
-      <Button basic color="black" onClick={_addAck} className="add">
+      <Button type="button" basic color="black" onClick={_addAck} className="add">
         <Icon name="plus" />
         Add Acknowledgement
       </Button>
