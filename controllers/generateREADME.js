@@ -1,4 +1,6 @@
-const generateREADME = (formObject) => {
+const generateImage = require("./generateImage");
+
+const generateREADME = (formObject, techState, ackState) => {
   const {
     acknowledgements,
     builtWith,
@@ -15,17 +17,29 @@ const generateREADME = (formObject) => {
     usage,
     username,
   } = formObject;
+  let licenseSection;
 
-  const builtWithMapped = builtWith.map((tech) => {
+  const builtWithMapped = techState.map((tech) => {
     return `* [${tech.techName}](${tech.techURL})`;
   });
 
-  const acknowledgementsMapped = acknowledgements.map((acknowledgement) => {
+  const acknowledgementsMapped = ackState.map((acknowledgement) => {
     return `* [${acknowledgement.name}](${acknowledgement.url})`;
   });
 
+  if (license === "none") {
+    licenseSection = ``;
+  } else {
+    licenseSection = `## License
+        
+This project uses the [${license}][license-url] license.`;
+  }
+
+  if (imagePreview !== "" && imagePreview != null) {
+    generateImage(imagePreview);
+  }
+
   return `# ${projectName}
-<!--- These are examples. See https://shields.io for others or to customize this set of shields. You might want to include dependencies, project status and licence info here --->
 ![GitHub repo size](https://img.shields.io/github/repo-size/${username}/${repoName})
 ![GitHub contributors](https://img.shields.io/github/contributors/${username}/${repoName})
 ![GitHub stars](https://img.shields.io/github/stars/${username}/${repoName}?style=social)
@@ -43,7 +57,6 @@ ${description}
 ·
 <a href="https://github.com/${username}/${repoName}/issues">Request Feature</a>
     
-<!-- TABLE OF CONTENTS -->
 ## Table of Contents
     
 * [About the Project](#about-the-project)
@@ -55,18 +68,19 @@ ${description}
 * [License](#license)
 * [Acknowledgements](#acknowledgements)
     
-<!-- ABOUT THE PROJECT -->
 ## About The Project
     
 [![Product Name Screen Shot][product-screenshot]]()
-    
-    
+
+${
+  builtWithMapped.length > 0
+    ? `
 ### Built With
+      
+${builtWithMapped}`
+    : ``
+}    
     
-${builtWithMapped}
-    
-    
-<!-- GETTING STARTED -->
 ## Getting Started
     
 To get a local copy up and running follow these simple steps.
@@ -101,20 +115,17 @@ ${usage}
 If you want to contact me you can reach me at [${email}](${email}).
     
     
-## License
-<!--- If you're not sure which open license to use see https://choosealicense.com/--->
+${licenseSection}
     
-This project uses the [${license}][license-url] license.
-    
-    
-<!-- ACKNOWLEDGEMENTS -->
+${
+  acknowledgementsMapped.length > 0
+    ? `
 ## Acknowledgements
-    
-${acknowledgementsMapped}
-    
-    
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+      
+${acknowledgementsMapped}`
+    : ``
+}
+
 [repo-size-shield]: https://img.shields.io/github/repo-size/${username}/${repoName}
 [contributors-shield]: https://img.shields.io/github/contributors/${username}/${repoName}
 [contributors-url]: https://github.com/${username}/${repoName}/graphs/contributors
@@ -124,11 +135,11 @@ ${acknowledgementsMapped}
 [stars-url]: https://github.com/${username}/${repoName}/stargazers
 [issues-shield]: https://img.shields.io/github/issues/${username}/${repoName}
 [issues-url]: https://github.com/${username}/${repoName}/issues
-[license-shield]: https://img.shields.io/github/license/${username}/${repoName}?style=flat-square
+[license-shield]: https://img.shields.io/badge/license-${license}-green
 [license-url]: https://github.com/${username}/${repoName}/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?&logo=linkedin&colorB=555
 [linkedin-url]: ${linkedIn}
-[product-screenshot]: images/screenshot.png`;
+[product-screenshot]: images/screenshot.jpg`;
 };
 
 module.exports = generateREADME;
