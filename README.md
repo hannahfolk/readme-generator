@@ -76,7 +76,9 @@ If you want to contact me you can reach me at [hfolk25@gmail.com](hfolk25@gmail.
         
 This project uses the [MIT][license-url] license.
     
-
+## Acknowledgements
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+* [README-template.md](https://github.com/scottydocs/README-template.md)
 
 [repo-size-shield]: https://img.shields.io/github/repo-size/hannahfolk/README-generator
 [contributors-shield]: https://img.shields.io/github/contributors/hannahfolk/README-generator
