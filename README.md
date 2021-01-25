@@ -6,7 +6,7 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
     
-Full stack application with React that generates a templated README for projects.
+Full stack application with React that generates a README for projects off of a template.
     
 <a href="https://github.com/hannahfolk/README-generator"><strong>Explore the docs »</strong></a>
     
@@ -34,7 +34,9 @@ Full stack application with React that generates a templated README for projects
 
 ### Built With
       
-* [React](https://reactjs.com/),* [Semantic UI React](https://react.semantic-ui.com/),* [Axios](https://www.npmjs.com/package/axios)    
+* [React](https://reactjs.com/)
+* [Semantic UI React](https://react.semantic-ui.com/)
+* [Axios](https://www.npmjs.com/package/axios)    
     
 ## Getting Started
     
